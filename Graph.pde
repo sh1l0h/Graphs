@@ -28,7 +28,7 @@ import java.util.Scanner;
 int[][] graph;
 Node[] nodes;
 ArrayList<Edge> edges;
-q
+
 void settings(){
     Scanner in = new Scanner(System.in);
     size(in.nextInt(),in.nextInt());
