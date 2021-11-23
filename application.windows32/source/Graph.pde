@@ -24,6 +24,10 @@ class Edge {
     this.to = to;
   }
   
+  public boolean contains(Node n){
+    return (from == n || to ==n);
+  }
+  
   public boolean equals(Edge a){
     return (a.from == from && a.to == to )||(a.from == to && a.to == from);
   }
@@ -121,7 +125,7 @@ void mousePressed() {
 }
 
 void mouseDragged() {
-  if(mouseButton == LEFT && locked) {
+  if(locked) {
     overNode.x = mouseX;
     overNode.y = mouseY;
   }
@@ -139,8 +143,25 @@ void keyReleased(){
 
 void keyPressed(){
   
-  if(key == 'a' && !isPressed) {
+  if(!isPressed &&!isOver&& key == 'a') {
     nodes.add(new Node(mouseX,mouseY,nodes.size()));
     isPressed = true;
   }
+  
+  if(!isPressed && lastSelected != null && key == 'r'){
+    ArrayList<Edge> edgesToRemove = new ArrayList<Edge>();
+    for(Edge i: edges){
+      if(i.contains(lastSelected))
+         edgesToRemove.add(i);
+    }
+    edges.removeAll(edgesToRemove);
+    for(int i = nodes.indexOf(lastSelected); i < nodes.size(); i++){
+      nodes.get(i).id--;
+    }
+    
+    nodes.remove(lastSelected);
+    
+    lastSelected = null;
+  }
+  
 }
