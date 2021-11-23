@@ -8,7 +8,7 @@ class Node {
   
   
   public boolean isSelected = false;
-  public int id = 0;
+  public int id = 0; 
   public int x;
   public int y;
   
